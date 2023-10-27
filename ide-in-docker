@@ -2,7 +2,7 @@
 
 VERSION=1.0.3
 DEFAULT_X11DOCKER_VERSION=7.1.4
-DEFAULT_DOCKER_IMAGE=01e9/ide-in-docker
+DEFAULT_DOCKER_IMAGE=erom/ide-in-docker
 
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]:-$0}"; )" &> /dev/null && pwd 2> /dev/null; )";
 SCRIPT_NAME=$(basename "${BASH_SOURCE[0]:-$0}")
@@ -13,7 +13,7 @@ while test $# -gt 0; do
   case "$1" in
     -h|--help)
       echo "Run IDE in docker container"
-      echo "    https://github.com/01e9/ide-in-docker"
+      echo "    https://github.com/EromAgency/ide-in-docker"
       echo ""
       echo "Usage:"
       echo "    ${SCRIPT_NAME} <ide-executable> [ide-options]"

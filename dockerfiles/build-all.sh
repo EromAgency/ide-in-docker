@@ -3,7 +3,7 @@
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]:-$0}"; )" &> /dev/null && pwd 2> /dev/null; )";
 cd "$SCRIPT_DIR"
 
-IMAGE=01e9/ide-in-docker
+IMAGE=erom/ide-in-docker
 PUSH=${PUSH:-}
 
 docker build -t "${IMAGE}" . # base
