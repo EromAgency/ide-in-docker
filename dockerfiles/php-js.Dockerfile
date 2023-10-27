@@ -1,7 +1,7 @@
 FROM 01e9/ide-in-docker as php
 
-ARG PHP_VERSION='7.4'
-ARG COMPOSER_VERSION='2.3.7'
+ARG PHP_VERSION='8.2.0'
+ARG COMPOSER_VERSION='2.6.5'
 
 RUN apt-get update \
     # PHP
