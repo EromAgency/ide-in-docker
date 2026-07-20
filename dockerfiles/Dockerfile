@@ -1,4 +1,4 @@
-FROM ubuntu:25.10
+FROM ubuntu:26.04
 
 ARG TZ_REGION='Europe'
 ARG TZ_CITY='Chisinau'
