@@ -6,21 +6,10 @@ ARG TZ_CITY='Chisinau'
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEBCONF_NONINTERACTIVE_SEEN=true
 
-# disable snap for firefox
-RUN tee /etc/apt/preferences.d/mozilla-firefox > /dev/null <<EOF
-Package: firefox*
-Pin: release o=LP-PPA-mozillateam
-Pin-Priority: 1001
-
-Package: firefox*
-Pin: release o=Ubuntu
-Pin-Priority: -1
-EOF
-
 RUN apt-get update \
     && apt-get install -y \
         # Essential
-        tini wget tar unzip git curl nano man htop build-essential socat gnupg2 \
+        tini wget tar unzip git curl nano man htop build-essential socat gnupg2 ca-certificates \
           software-properties-common bash-completion openssh-server apparmor apparmor-utils \
         # GUI
         qt6-base-dev dmz-cursor-theme libgtk2.0-0 gtk2-engines-murrine gtk2-engines-pixbuf xdg-utils libxext6 libxrender1 libxtst6 libxslt1.1 fonts-dejavu-core \
@@ -42,8 +31,6 @@ RUN apt-get update \
         libxshmfence-dev \
         # web browser
         libkf5coreaddons5 libkf5i18n5 libkf5guiaddons5 falkon \
-    && add-apt-repository ppa:mozillateam/ppa \
-        && apt-get install -y firefox \
     # unicode
     && apt-get install -y locales \
         && locale-gen en_US.UTF-8 \
@@ -58,6 +45,29 @@ RUN apt-get update \
         && debconf-set-selections /tmp/preseed.cfg \
         && rm -f /etc/timezone /etc/localtime \
         && apt-get install -y tzdata \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
+
+# disable snap for firefox
+RUN tee /etc/apt/preferences.d/mozilla-firefox > /dev/null <<EOF
+Package: firefox*
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+
+Package: firefox*
+Pin: release o=Ubuntu
+Pin-Priority: -1
+EOF
+
+RUN apt-get update \
+    && add-apt-repository ppa:mozillateam/ppa \
+        && apt-get install -y firefox \
+    && wget -qO /usr/share/keyrings/google-chrome.gpg.asc https://dl.google.com/linux/linux_signing_key.pub \
+        && gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg /usr/share/keyrings/google-chrome.gpg.asc \
+        && rm /usr/share/keyrings/google-chrome.gpg.asc \
+        && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" \
+            > /etc/apt/sources.list.d/google-chrome.list \
+        && apt-get update \
+        && apt-get install -y google-chrome-stable \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/*
 
 ENV LANG=en_US.UTF-8
