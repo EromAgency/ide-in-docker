@@ -1,4 +1,4 @@
-FROM 01e9/ide-in-docker AS php
+FROM erom/ide-in-docker AS php
 
 ARG PHP_VERSION='8.5'
 ARG COMPOSER_VERSION='2.10.2'

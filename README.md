@@ -2,7 +2,7 @@
 
 A script to run IDE in docker container (via [x11docker](https://github.com/mviereck/x11docker))
 
-&plus; [docker images](https://hub.docker.com/r/01e9/ide-in-docker/tags) with GUI and development packages
+&plus; [docker images](https://hub.docker.com/r/erom/ide-in-docker/tags) with GUI and development packages
 
 <details><summary>Diagram</summary><img src="diagram.png" /></details>
 

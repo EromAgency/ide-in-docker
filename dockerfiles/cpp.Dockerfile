@@ -1,4 +1,4 @@
-FROM 01e9/ide-in-docker AS cpp
+FROM erom/ide-in-docker AS cpp
 
 ARG CMAKE_VERSION='4.2.3'
 ARG NINJA_VERSION='1.13.2'
